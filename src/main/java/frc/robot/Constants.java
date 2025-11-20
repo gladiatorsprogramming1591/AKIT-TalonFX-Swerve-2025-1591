@@ -13,6 +13,7 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.RobotBase;
 
 /**
@@ -33,5 +34,12 @@ public final class Constants {
 
     /** Replaying from a log file. */
     REPLAY
+  }
+
+  public class robotInitConstants {
+    public static final DigitalInput dIO_port = new DigitalInput(0);
+    // .get() returns true if DIO port is unused, and false if DIO port is jumped
+    // (with a resistor). Chaz will always be jumped on this channel.
+    public static final boolean isCompBot = dIO_port.get();
   }
 }

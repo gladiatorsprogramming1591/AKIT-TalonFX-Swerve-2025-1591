@@ -8,7 +8,6 @@ import com.ctre.phoenix6.hardware.*;
 import com.ctre.phoenix6.signals.*;
 import com.ctre.phoenix6.swerve.*;
 import com.ctre.phoenix6.swerve.SwerveModuleConstants.*;
-
 import edu.wpi.first.math.Matrix;
 import edu.wpi.first.math.VecBuilder;
 import edu.wpi.first.math.numbers.N1;
@@ -20,68 +19,78 @@ import frc.robot.Constants.robotInitConstants;
 // https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/tuner-swerve/index.html
 public class TunerConstants {
 
-    // Theoretical free speed (m/s) at 12 V applied output;
-    // This needs to be tuned to your individual robot
-    public static final LinearVelocity kSpeedAt12Volts = robotInitConstants.isCompBot ?
-        MetersPerSecond.of(5.06) : MetersPerSecond.of(5.21);
+  // Theoretical free speed (m/s) at 12 V applied output;
+  // This needs to be tuned to your individual robot
+  public static final LinearVelocity kSpeedAt12Volts =
+      robotInitConstants.isCompBot ? MetersPerSecond.of(5.06) : MetersPerSecond.of(5.21);
 
-    public class PoseidonTunerConstants {
-        // Both sets of gains need to be tuned to your individual robot.
+  public class PoseidonTunerConstants {
+    // Both sets of gains need to be tuned to your individual robot.
 
-        // The steer motor uses any SwerveModule.SteerRequestType control request with the
-        // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
-        // private static final Slot0Configs steerGains = new Slot0Configs()
-        // .withKP(500).withKI(0).withKD(50)
-        // .withKS(0.8595).withKV(1.438).withKA(0)
-        // .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
-        // // When using closed-loop control, the drive motor uses the control
-        // // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
-        // private static final Slot0Configs driveGains = new Slot0Configs()
-        // .withKP(60).withKI(0).withKD(0)
-        // .withKS(5.0).withKV(0.0);
+    // The steer motor uses any SwerveModule.SteerRequestType control request with the
+    // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
+    // private static final Slot0Configs steerGains = new Slot0Configs()
+    // .withKP(500).withKI(0).withKD(50)
+    // .withKS(0.8595).withKV(1.438).withKA(0)
+    // .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
+    // // When using closed-loop control, the drive motor uses the control
+    // // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
+    // private static final Slot0Configs driveGains = new Slot0Configs()
+    // .withKP(60).withKI(0).withKD(0)
+    // .withKS(5.0).withKV(0.0);
 
-        // // The closed-loop output type to use for the steer motors;
-        // // This affects the PID/FF gains for the steer motors
-        // private static final ClosedLoopOutputType kSteerClosedLoopOutput = ClosedLoopOutputType.TorqueCurrentFOC;
-        // // The closed-loop output type to use for the drive motors;
-        // // This affects the PID/FF gains for the drive motors
-        // private static final ClosedLoopOutputType kDriveClosedLoopOutput = ClosedLoopOutputType.TorqueCurrentFOC;
+    // // The closed-loop output type to use for the steer motors;
+    // // This affects the PID/FF gains for the steer motors
+    // private static final ClosedLoopOutputType kSteerClosedLoopOutput =
+    // ClosedLoopOutputType.TorqueCurrentFOC;
+    // // The closed-loop output type to use for the drive motors;
+    // // This affects the PID/FF gains for the drive motors
+    // private static final ClosedLoopOutputType kDriveClosedLoopOutput =
+    // ClosedLoopOutputType.TorqueCurrentFOC;
 
-        // // The type of motor used for the drive motor
-        // private static final DriveMotorArrangement kDriveMotorType = DriveMotorArrangement.TalonFX_Integrated;
-        // // The type of motor used for the drive motor
-        // private static final SteerMotorArrangement kSteerMotorType = SteerMotorArrangement.TalonFX_Integrated;
+    // // The type of motor used for the drive motor
+    // private static final DriveMotorArrangement kDriveMotorType =
+    // DriveMotorArrangement.TalonFX_Integrated;
+    // // The type of motor used for the drive motor
+    // private static final SteerMotorArrangement kSteerMotorType =
+    // SteerMotorArrangement.TalonFX_Integrated;
 
-        // // The remote sensor feedback type to use for the steer motors;
-        // // When not Pro-licensed, Fused*/Sync* automatically fall back to Remote*
-        // private static final SteerFeedbackType kSteerFeedbackType = SteerFeedbackType.FusedCANcoder;
+    // // The remote sensor feedback type to use for the steer motors;
+    // // When not Pro-licensed, Fused*/Sync* automatically fall back to Remote*
+    // private static final SteerFeedbackType kSteerFeedbackType = SteerFeedbackType.FusedCANcoder;
 
-        // // The stator current at which the wheels start to slip;
-        // // This needs to be tuned to your individual robot
-        // private static final Current kSlipCurrent = Amps.of(120.0);
+    // // The stator current at which the wheels start to slip;
+    // // This needs to be tuned to your individual robot
+    // private static final Current kSlipCurrent = Amps.of(120.0);
 
-        // // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be null.
-        // // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
-        // private static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
-        // private static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
-        //     .withCurrentLimits(
-        //         new CurrentLimitsConfigs()
-        //             // Swerve azimuth does not require much torque output, so we can set a relatively low
-        //             // stator current limit to help avoid brownouts without impacting performance.
-        //             .withStatorCurrentLimit(Amps.of(60))
-        //             .withStatorCurrentLimitEnable(true)
-        //     );
-        // Generated by the Tuner X Swerve Project Generator
-// https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/tuner-swerve/index.html
-    private static final Slot0Configs steerGains = new Slot0Configs()
-        .withKP(100).withKI(0).withKD(0.5)
-        .withKS(0.1).withKV(2.66).withKA(0)
-        .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
+    // // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be
+    // null.
+    // // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
+    // private static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
+    // private static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
+    //     .withCurrentLimits(
+    //         new CurrentLimitsConfigs()
+    //             // Swerve azimuth does not require much torque output, so we can set a relatively
+    // low
+    //             // stator current limit to help avoid brownouts without impacting performance.
+    //             .withStatorCurrentLimit(Amps.of(60))
+    //             .withStatorCurrentLimitEnable(true)
+    //     );
+    // Generated by the Tuner X Swerve Project Generator
+    // https://v6.docs.ctr-electronics.com/en/stable/docs/tuner/tuner-swerve/index.html
+    private static final Slot0Configs steerGains =
+        new Slot0Configs()
+            .withKP(100)
+            .withKI(0)
+            .withKD(0.5)
+            .withKS(0.1)
+            .withKV(2.66)
+            .withKA(0)
+            .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
     // When using closed-loop control, the drive motor uses the control
     // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
-    private static final Slot0Configs driveGains = new Slot0Configs()
-        .withKP(0.1).withKI(0).withKD(0)
-        .withKS(0).withKV(0.124);
+    private static final Slot0Configs driveGains =
+        new Slot0Configs().withKP(0.1).withKI(0).withKD(0).withKS(0).withKV(0.124);
 
     // The closed-loop output type to use for the steer motors;
     // This affects the PID/FF gains for the steer motors
@@ -91,9 +100,11 @@ public class TunerConstants {
     private static final ClosedLoopOutputType kDriveClosedLoopOutput = ClosedLoopOutputType.Voltage;
 
     // The type of motor used for the drive motor
-    private static final DriveMotorArrangement kDriveMotorType = DriveMotorArrangement.TalonFX_Integrated;
+    private static final DriveMotorArrangement kDriveMotorType =
+        DriveMotorArrangement.TalonFX_Integrated;
     // The type of motor used for the drive motor
-    private static final SteerMotorArrangement kSteerMotorType = SteerMotorArrangement.TalonFX_Integrated;
+    private static final SteerMotorArrangement kSteerMotorType =
+        SteerMotorArrangement.TalonFX_Integrated;
 
     // The remote sensor feedback type to use for the steer motors;
     // When not Pro-licensed, Fused*/Sync* automatically fall back to Remote*
@@ -106,388 +117,450 @@ public class TunerConstants {
     // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be null.
     // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
     private static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
-    private static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
-        .withCurrentLimits(
-            new CurrentLimitsConfigs()
-                // Swerve azimuth does not require much torque output, so we can set a relatively low
-                // stator current limit to help avoid brownouts without impacting performance.
-                .withStatorCurrentLimit(Amps.of(60))
-                .withStatorCurrentLimitEnable(true)
-        );
-        private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
-        // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
-        private static final Pigeon2Configuration pigeonConfigs = null;
-
-        // CAN bus that the devices are located on;
-        // All swerve devices must share the same CAN bus
-        public static final CANBus kCANBus = new CANBus("CANivore", "./logs/example.hoot");
-
-        // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
-        // This may need to be tuned to your individual robot
-        private static final double kCoupleRatio = 3.5714285714285716;
-
-        private static final double kDriveGearRatio = 6.122448979591837;
-        private static final double kSteerGearRatio = 21.428571428571427;
-        private static final Distance kWheelRadius = Inches.of(1.94);
-
-        private static final boolean kInvertLeftSide = false;
-        private static final boolean kInvertRightSide = true;
-
-        private static final int kPigeonId = 16;
-
-        // These are only used for simulation
-        private static final MomentOfInertia kSteerInertia = KilogramSquareMeters.of(0.01);
-        private static final MomentOfInertia kDriveInertia = KilogramSquareMeters.of(0.01);
-        // Simulated voltage necessary to overcome friction
-        private static final Voltage kSteerFrictionVoltage = Volts.of(0.2);
-        private static final Voltage kDriveFrictionVoltage = Volts.of(0.2);
-
-        // Front Left
-        private static final int kFrontLeftDriveMotorId = 5;
-        private static final int kFrontLeftSteerMotorId = 4;
-        private static final int kFrontLeftEncoderId = 10;
-        private static final Angle kFrontLeftEncoderOffset = Rotations.of(-0.21337890625);
-        private static final boolean kFrontLeftSteerMotorInverted = true;
-        private static final boolean kFrontLeftEncoderInverted = false;
-
-        private static final Distance kFrontLeftXPos = Inches.of(10.875);
-        private static final Distance kFrontLeftYPos = Inches.of(10.875);
-
-        // Front Right
-        private static final int kFrontRightDriveMotorId = 7;
-        private static final int kFrontRightSteerMotorId = 6;
-        private static final int kFrontRightEncoderId = 11;
-        private static final Angle kFrontRightEncoderOffset = Rotations.of(0.351318359375);
-        private static final boolean kFrontRightSteerMotorInverted = true;
-        private static final boolean kFrontRightEncoderInverted = false;
-
-        private static final Distance kFrontRightXPos = Inches.of(10.875);
-        private static final Distance kFrontRightYPos = Inches.of(-10.875);
-
-        // Back Left
-        private static final int kBackLeftDriveMotorId = 3;
-        private static final int kBackLeftSteerMotorId = 2;
-        private static final int kBackLeftEncoderId = 9;
-        private static final Angle kBackLeftEncoderOffset = Rotations.of(0.274169921875);
-        private static final boolean kBackLeftSteerMotorInverted = true;
-        private static final boolean kBackLeftEncoderInverted = false;
-
-        private static final Distance kBackLeftXPos = Inches.of(-10.875);
-        private static final Distance kBackLeftYPos = Inches.of(10.875);
-
-        // Back Right
-        private static final int kBackRightDriveMotorId = 1;
-        private static final int kBackRightSteerMotorId = 20;
-        private static final int kBackRightEncoderId = 8;
-        private static final Angle kBackRightEncoderOffset = Rotations.of(-0.11474609375);
-        private static final boolean kBackRightSteerMotorInverted = true;
-        private static final boolean kBackRightEncoderInverted = false;
-
-        private static final Distance kBackRightXPos = Inches.of(-10.875);
-        private static final Distance kBackRightYPos = Inches.of(-10.875);
-    }
-
-    public class ChazTunerConstants {
-        // Both sets of gains need to be tuned to your individual robot.
-
-        // The steer motor uses any SwerveModule.SteerRequestType control request with the
-        // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
-        private static final Slot0Configs steerGains = new Slot0Configs()
-        .withKP(500).withKI(0).withKD(50)
-        .withKS(0.8595).withKV(1.438).withKA(0)
-        .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
-        // When using closed-loop control, the drive motor uses the control
-        // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
-        private static final Slot0Configs driveGains = new Slot0Configs()
-        .withKP(60).withKI(0).withKD(0)
-        .withKS(5.0).withKV(0.0);
-
-        // The closed-loop output type to use for the steer motors;
-        // This affects the PID/FF gains for the steer motors
-        private static final ClosedLoopOutputType kSteerClosedLoopOutput = ClosedLoopOutputType.TorqueCurrentFOC;
-        // The closed-loop output type to use for the drive motors;
-        // This affects the PID/FF gains for the drive motors
-        private static final ClosedLoopOutputType kDriveClosedLoopOutput = ClosedLoopOutputType.TorqueCurrentFOC;
-
-        // The type of motor used for the drive motor
-        private static final DriveMotorArrangement kDriveMotorType = DriveMotorArrangement.TalonFX_Integrated;
-        // The type of motor used for the drive motor
-        private static final SteerMotorArrangement kSteerMotorType = SteerMotorArrangement.TalonFX_Integrated;
-
-        // The remote sensor feedback type to use for the steer motors;
-        // When not Pro-licensed, Fused*/Sync* automatically fall back to Remote*
-        private static final SteerFeedbackType kSteerFeedbackType = SteerFeedbackType.FusedCANcoder;
-
-        // The stator current at which the wheels start to slip;
-        // This needs to be tuned to your individual robot
-        private static final Current kSlipCurrent = Amps.of(120);
-
-        // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be null.
-        // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
-        private static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
-        private static final TalonFXConfiguration steerInitialConfigs = new TalonFXConfiguration()
+    private static final TalonFXConfiguration steerInitialConfigs =
+        new TalonFXConfiguration()
             .withCurrentLimits(
                 new CurrentLimitsConfigs()
-                    // Swerve azimuth does not require much torque output, so we can set a relatively low
+                    // Swerve azimuth does not require much torque output, so we can set a
+                    // relatively low
                     // stator current limit to help avoid brownouts without impacting performance.
                     .withStatorCurrentLimit(Amps.of(60))
-                    .withStatorCurrentLimitEnable(true)
-            );
-        private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
-        // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
-        private static final Pigeon2Configuration pigeonConfigs = null;
+                    .withStatorCurrentLimitEnable(true));
+    private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
+    // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
+    private static final Pigeon2Configuration pigeonConfigs = null;
 
-        // CAN bus that the devices are located on;
-        // All swerve devices must share the same CAN bus
-        public static final CANBus kCANBus = new CANBus("CANivore", "./logs/example.hoot");
+    // CAN bus that the devices are located on;
+    // All swerve devices must share the same CAN bus
+    public static final CANBus kCANBus = new CANBus("CANivore", "./logs/example.hoot");
 
-        // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
-        // This may need to be tuned to your individual robot
-        private static final double kCoupleRatio = 3.5714285714285716;
+    // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
+    // This may need to be tuned to your individual robot
+    private static final double kCoupleRatio = 3.5714285714285716;
 
-        private static final double kDriveGearRatio = 6.122448979591837;
-        private static final double kSteerGearRatio = 21.428571428571427;
-        private static final Distance kWheelRadius = Inches.of(1.9391510333863275039745627980922);
+    private static final double kDriveGearRatio = 6.122448979591837;
+    private static final double kSteerGearRatio = 21.428571428571427;
+    private static final Distance kWheelRadius = Inches.of(1.94);
 
-        private static final boolean kInvertLeftSide = false;
-        private static final boolean kInvertRightSide = true;
+    private static final boolean kInvertLeftSide = false;
+    private static final boolean kInvertRightSide = true;
 
-        private static final int kPigeonId = 16;
+    private static final int kPigeonId = 16;
 
-        // These are only used for simulation
-        private static final MomentOfInertia kSteerInertia = KilogramSquareMeters.of(0.01);
-        private static final MomentOfInertia kDriveInertia = KilogramSquareMeters.of(0.01);
-        // Simulated voltage necessary to overcome friction
-        private static final Voltage kSteerFrictionVoltage = Volts.of(0.2);
-        private static final Voltage kDriveFrictionVoltage = Volts.of(0.2);
+    // These are only used for simulation
+    private static final MomentOfInertia kSteerInertia = KilogramSquareMeters.of(0.01);
+    private static final MomentOfInertia kDriveInertia = KilogramSquareMeters.of(0.01);
+    // Simulated voltage necessary to overcome friction
+    private static final Voltage kSteerFrictionVoltage = Volts.of(0.2);
+    private static final Voltage kDriveFrictionVoltage = Volts.of(0.2);
 
-        // Front Left
-        private static final int kFrontLeftDriveMotorId = 7;
-        private static final int kFrontLeftSteerMotorId = 6;
-        private static final int kFrontLeftEncoderId = 11;
-        private static final Angle kFrontLeftEncoderOffset = Rotations.of(-0.212158); // 2/12 Update: Minor drift (last 3 digits)
-        private static final boolean kFrontLeftSteerMotorInverted = true;
-        private static final boolean kFrontLeftEncoderInverted = false;
+    // Front Left
+    private static final int kFrontLeftDriveMotorId = 5;
+    private static final int kFrontLeftSteerMotorId = 4;
+    private static final int kFrontLeftEncoderId = 10;
+    private static final Angle kFrontLeftEncoderOffset = Rotations.of(-0.21337890625);
+    private static final boolean kFrontLeftSteerMotorInverted = true;
+    private static final boolean kFrontLeftEncoderInverted = false;
 
-        private static final Distance kFrontLeftXPos = Inches.of(10.875);
-        private static final Distance kFrontLeftYPos = Inches.of(10.875);
+    private static final Distance kFrontLeftXPos = Inches.of(10.875);
+    private static final Distance kFrontLeftYPos = Inches.of(10.875);
 
-        // Front Right
-        private static final int kFrontRightDriveMotorId = 1;
-        private static final int kFrontRightSteerMotorId = 0;
-        private static final int kFrontRightEncoderId = 8;
-        private static final Angle kFrontRightEncoderOffset = Rotations.of(0.352051); // 2/12 Update: Minor drift (last 3 digits)
-        private static final boolean kFrontRightSteerMotorInverted = true;
-        private static final boolean kFrontRightEncoderInverted = false;
+    // Front Right
+    private static final int kFrontRightDriveMotorId = 7;
+    private static final int kFrontRightSteerMotorId = 6;
+    private static final int kFrontRightEncoderId = 11;
+    private static final Angle kFrontRightEncoderOffset = Rotations.of(0.351318359375);
+    private static final boolean kFrontRightSteerMotorInverted = true;
+    private static final boolean kFrontRightEncoderInverted = false;
 
-        private static final Distance kFrontRightXPos = Inches.of(10.875);
-        private static final Distance kFrontRightYPos = Inches.of(-10.875);
+    private static final Distance kFrontRightXPos = Inches.of(10.875);
+    private static final Distance kFrontRightYPos = Inches.of(-10.875);
 
-        // Back Left
-        private static final int kBackLeftDriveMotorId = 5;
-        private static final int kBackLeftSteerMotorId = 4;
-        private static final int kBackLeftEncoderId = 10;
-        private static final Angle kBackLeftEncoderOffset = Rotations.of(0.276123); // 2/12 Update: No drift
-        private static final boolean kBackLeftSteerMotorInverted = true;
-        private static final boolean kBackLeftEncoderInverted = false;
+    // Back Left
+    private static final int kBackLeftDriveMotorId = 3;
+    private static final int kBackLeftSteerMotorId = 2;
+    private static final int kBackLeftEncoderId = 9;
+    private static final Angle kBackLeftEncoderOffset = Rotations.of(0.274169921875);
+    private static final boolean kBackLeftSteerMotorInverted = true;
+    private static final boolean kBackLeftEncoderInverted = false;
 
-        private static final Distance kBackLeftXPos = Inches.of(-10.875);
-        private static final Distance kBackLeftYPos = Inches.of(10.875);
+    private static final Distance kBackLeftXPos = Inches.of(-10.875);
+    private static final Distance kBackLeftYPos = Inches.of(10.875);
 
-        // Back Right
-        private static final int kBackRightDriveMotorId = 3;
-        private static final int kBackRightSteerMotorId = 2;
-        private static final int kBackRightEncoderId = 9;
-        private static final Angle kBackRightEncoderOffset = Rotations.of(-0.117188); // 2/12 Update: Most drift (by +0.002)
-        private static final boolean kBackRightSteerMotorInverted = true;
-        private static final boolean kBackRightEncoderInverted = false;
+    // Back Right
+    private static final int kBackRightDriveMotorId = 1;
+    private static final int kBackRightSteerMotorId = 20;
+    private static final int kBackRightEncoderId = 8;
+    private static final Angle kBackRightEncoderOffset = Rotations.of(-0.11474609375);
+    private static final boolean kBackRightSteerMotorInverted = true;
+    private static final boolean kBackRightEncoderInverted = false;
 
-        private static final Distance kBackRightXPos = Inches.of(-10.875);
-        private static final Distance kBackRightYPos = Inches.of(-10.875);
+    private static final Distance kBackRightXPos = Inches.of(-10.875);
+    private static final Distance kBackRightYPos = Inches.of(-10.875);
+  }
+
+  public class ChazTunerConstants {
+    // Both sets of gains need to be tuned to your individual robot.
+
+    // The steer motor uses any SwerveModule.SteerRequestType control request with the
+    // output type specified by SwerveModuleConstants.SteerMotorClosedLoopOutput
+    private static final Slot0Configs steerGains =
+        new Slot0Configs()
+            .withKP(500)
+            .withKI(0)
+            .withKD(50)
+            .withKS(0.8595)
+            .withKV(1.438)
+            .withKA(0)
+            .withStaticFeedforwardSign(StaticFeedforwardSignValue.UseClosedLoopSign);
+    // When using closed-loop control, the drive motor uses the control
+    // output type specified by SwerveModuleConstants.DriveMotorClosedLoopOutput
+    private static final Slot0Configs driveGains =
+        new Slot0Configs().withKP(60).withKI(0).withKD(0).withKS(5.0).withKV(0.0);
+
+    // The closed-loop output type to use for the steer motors;
+    // This affects the PID/FF gains for the steer motors
+    private static final ClosedLoopOutputType kSteerClosedLoopOutput =
+        ClosedLoopOutputType.TorqueCurrentFOC;
+    // The closed-loop output type to use for the drive motors;
+    // This affects the PID/FF gains for the drive motors
+    private static final ClosedLoopOutputType kDriveClosedLoopOutput =
+        ClosedLoopOutputType.TorqueCurrentFOC;
+
+    // The type of motor used for the drive motor
+    private static final DriveMotorArrangement kDriveMotorType =
+        DriveMotorArrangement.TalonFX_Integrated;
+    // The type of motor used for the drive motor
+    private static final SteerMotorArrangement kSteerMotorType =
+        SteerMotorArrangement.TalonFX_Integrated;
+
+    // The remote sensor feedback type to use for the steer motors;
+    // When not Pro-licensed, Fused*/Sync* automatically fall back to Remote*
+    private static final SteerFeedbackType kSteerFeedbackType = SteerFeedbackType.FusedCANcoder;
+
+    // The stator current at which the wheels start to slip;
+    // This needs to be tuned to your individual robot
+    private static final Current kSlipCurrent = Amps.of(120);
+
+    // Initial configs for the drive and steer motors and the azimuth encoder; these cannot be null.
+    // Some configs will be overwritten; check the `with*InitialConfigs()` API documentation.
+    private static final TalonFXConfiguration driveInitialConfigs = new TalonFXConfiguration();
+    private static final TalonFXConfiguration steerInitialConfigs =
+        new TalonFXConfiguration()
+            .withCurrentLimits(
+                new CurrentLimitsConfigs()
+                    // Swerve azimuth does not require much torque output, so we can set a
+                    // relatively low
+                    // stator current limit to help avoid brownouts without impacting performance.
+                    .withStatorCurrentLimit(Amps.of(60))
+                    .withStatorCurrentLimitEnable(true));
+    private static final CANcoderConfiguration encoderInitialConfigs = new CANcoderConfiguration();
+    // Configs for the Pigeon 2; leave this null to skip applying Pigeon 2 configs
+    private static final Pigeon2Configuration pigeonConfigs = null;
+
+    // CAN bus that the devices are located on;
+    // All swerve devices must share the same CAN bus
+    public static final CANBus kCANBus = new CANBus("CANivore", "./logs/example.hoot");
+
+    // Every 1 rotation of the azimuth results in kCoupleRatio drive motor turns;
+    // This may need to be tuned to your individual robot
+    private static final double kCoupleRatio = 3.5714285714285716;
+
+    private static final double kDriveGearRatio = 6.122448979591837;
+    private static final double kSteerGearRatio = 21.428571428571427;
+    private static final Distance kWheelRadius = Inches.of(1.9391510333863275039745627980922);
+
+    private static final boolean kInvertLeftSide = false;
+    private static final boolean kInvertRightSide = true;
+
+    private static final int kPigeonId = 16;
+
+    // These are only used for simulation
+    private static final MomentOfInertia kSteerInertia = KilogramSquareMeters.of(0.01);
+    private static final MomentOfInertia kDriveInertia = KilogramSquareMeters.of(0.01);
+    // Simulated voltage necessary to overcome friction
+    private static final Voltage kSteerFrictionVoltage = Volts.of(0.2);
+    private static final Voltage kDriveFrictionVoltage = Volts.of(0.2);
+
+    // Front Left
+    private static final int kFrontLeftDriveMotorId = 7;
+    private static final int kFrontLeftSteerMotorId = 6;
+    private static final int kFrontLeftEncoderId = 11;
+    private static final Angle kFrontLeftEncoderOffset =
+        Rotations.of(-0.212158); // 2/12 Update: Minor drift (last 3 digits)
+    private static final boolean kFrontLeftSteerMotorInverted = true;
+    private static final boolean kFrontLeftEncoderInverted = false;
+
+    private static final Distance kFrontLeftXPos = Inches.of(10.875);
+    private static final Distance kFrontLeftYPos = Inches.of(10.875);
+
+    // Front Right
+    private static final int kFrontRightDriveMotorId = 1;
+    private static final int kFrontRightSteerMotorId = 0;
+    private static final int kFrontRightEncoderId = 8;
+    private static final Angle kFrontRightEncoderOffset =
+        Rotations.of(0.352051); // 2/12 Update: Minor drift (last 3 digits)
+    private static final boolean kFrontRightSteerMotorInverted = true;
+    private static final boolean kFrontRightEncoderInverted = false;
+
+    private static final Distance kFrontRightXPos = Inches.of(10.875);
+    private static final Distance kFrontRightYPos = Inches.of(-10.875);
+
+    // Back Left
+    private static final int kBackLeftDriveMotorId = 5;
+    private static final int kBackLeftSteerMotorId = 4;
+    private static final int kBackLeftEncoderId = 10;
+    private static final Angle kBackLeftEncoderOffset =
+        Rotations.of(0.276123); // 2/12 Update: No drift
+    private static final boolean kBackLeftSteerMotorInverted = true;
+    private static final boolean kBackLeftEncoderInverted = false;
+
+    private static final Distance kBackLeftXPos = Inches.of(-10.875);
+    private static final Distance kBackLeftYPos = Inches.of(10.875);
+
+    // Back Right
+    private static final int kBackRightDriveMotorId = 3;
+    private static final int kBackRightSteerMotorId = 2;
+    private static final int kBackRightEncoderId = 9;
+    private static final Angle kBackRightEncoderOffset =
+        Rotations.of(-0.117188); // 2/12 Update: Most drift (by +0.002)
+    private static final boolean kBackRightSteerMotorInverted = true;
+    private static final boolean kBackRightEncoderInverted = false;
+
+    private static final Distance kBackRightXPos = Inches.of(-10.875);
+    private static final Distance kBackRightYPos = Inches.of(-10.875);
+  }
+
+  public static final SwerveDrivetrainConstants DrivetrainConstants =
+      robotInitConstants.isCompBot
+          ? new SwerveDrivetrainConstants()
+              .withCANBusName(PoseidonTunerConstants.kCANBus.getName())
+              .withPigeon2Id(PoseidonTunerConstants.kPigeonId)
+              .withPigeon2Configs(PoseidonTunerConstants.pigeonConfigs)
+          : new SwerveDrivetrainConstants()
+              .withCANBusName(ChazTunerConstants.kCANBus.getName())
+              .withPigeon2Id(ChazTunerConstants.kPigeonId)
+              .withPigeon2Configs(ChazTunerConstants.pigeonConfigs);
+
+  private static final SwerveModuleConstantsFactory<
+          TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
+      ConstantCreator =
+          robotInitConstants.isCompBot
+              ? new SwerveModuleConstantsFactory<
+                      TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
+                  .withDriveMotorGearRatio(PoseidonTunerConstants.kDriveGearRatio)
+                  .withSteerMotorGearRatio(PoseidonTunerConstants.kSteerGearRatio)
+                  .withCouplingGearRatio(PoseidonTunerConstants.kCoupleRatio)
+                  .withWheelRadius(PoseidonTunerConstants.kWheelRadius)
+                  .withSteerMotorGains(PoseidonTunerConstants.steerGains)
+                  .withDriveMotorGains(PoseidonTunerConstants.driveGains)
+                  .withSteerMotorClosedLoopOutput(PoseidonTunerConstants.kSteerClosedLoopOutput)
+                  .withDriveMotorClosedLoopOutput(PoseidonTunerConstants.kDriveClosedLoopOutput)
+                  .withSlipCurrent(PoseidonTunerConstants.kSlipCurrent)
+                  .withSpeedAt12Volts(TunerConstants.kSpeedAt12Volts)
+                  .withDriveMotorType(PoseidonTunerConstants.kDriveMotorType)
+                  .withSteerMotorType(PoseidonTunerConstants.kSteerMotorType)
+                  .withFeedbackSource(PoseidonTunerConstants.kSteerFeedbackType)
+                  .withDriveMotorInitialConfigs(PoseidonTunerConstants.driveInitialConfigs)
+                  .withSteerMotorInitialConfigs(PoseidonTunerConstants.steerInitialConfigs)
+                  .withEncoderInitialConfigs(PoseidonTunerConstants.encoderInitialConfigs)
+                  .withSteerInertia(PoseidonTunerConstants.kSteerInertia)
+                  .withDriveInertia(PoseidonTunerConstants.kDriveInertia)
+                  .withSteerFrictionVoltage(PoseidonTunerConstants.kSteerFrictionVoltage)
+                  .withDriveFrictionVoltage(PoseidonTunerConstants.kDriveFrictionVoltage)
+              : new SwerveModuleConstantsFactory<
+                      TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
+                  .withDriveMotorGearRatio(ChazTunerConstants.kDriveGearRatio)
+                  .withSteerMotorGearRatio(ChazTunerConstants.kSteerGearRatio)
+                  .withCouplingGearRatio(ChazTunerConstants.kCoupleRatio)
+                  .withWheelRadius(ChazTunerConstants.kWheelRadius)
+                  .withSteerMotorGains(ChazTunerConstants.steerGains)
+                  .withDriveMotorGains(ChazTunerConstants.driveGains)
+                  .withSteerMotorClosedLoopOutput(ChazTunerConstants.kSteerClosedLoopOutput)
+                  .withDriveMotorClosedLoopOutput(ChazTunerConstants.kDriveClosedLoopOutput)
+                  .withSlipCurrent(ChazTunerConstants.kSlipCurrent)
+                  .withSpeedAt12Volts(TunerConstants.kSpeedAt12Volts)
+                  .withDriveMotorType(ChazTunerConstants.kDriveMotorType)
+                  .withSteerMotorType(ChazTunerConstants.kSteerMotorType)
+                  .withFeedbackSource(ChazTunerConstants.kSteerFeedbackType)
+                  .withDriveMotorInitialConfigs(ChazTunerConstants.driveInitialConfigs)
+                  .withSteerMotorInitialConfigs(ChazTunerConstants.steerInitialConfigs)
+                  .withEncoderInitialConfigs(ChazTunerConstants.encoderInitialConfigs)
+                  .withSteerInertia(ChazTunerConstants.kSteerInertia)
+                  .withDriveInertia(ChazTunerConstants.kDriveInertia)
+                  .withSteerFrictionVoltage(ChazTunerConstants.kSteerFrictionVoltage)
+                  .withDriveFrictionVoltage(ChazTunerConstants.kDriveFrictionVoltage);
+
+  public static final SwerveModuleConstants<
+          TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
+      FrontLeft =
+          robotInitConstants.isCompBot
+              ? ConstantCreator.createModuleConstants(
+                  PoseidonTunerConstants.kFrontLeftSteerMotorId,
+                  PoseidonTunerConstants.kFrontLeftDriveMotorId,
+                  PoseidonTunerConstants.kFrontLeftEncoderId,
+                  PoseidonTunerConstants.kFrontLeftEncoderOffset,
+                  PoseidonTunerConstants.kFrontLeftXPos,
+                  PoseidonTunerConstants.kFrontLeftYPos,
+                  PoseidonTunerConstants.kInvertLeftSide,
+                  PoseidonTunerConstants.kFrontLeftSteerMotorInverted,
+                  PoseidonTunerConstants.kFrontLeftEncoderInverted)
+              : ConstantCreator.createModuleConstants(
+                  ChazTunerConstants.kFrontLeftSteerMotorId,
+                  ChazTunerConstants.kFrontLeftDriveMotorId,
+                  ChazTunerConstants.kFrontLeftEncoderId,
+                  ChazTunerConstants.kFrontLeftEncoderOffset,
+                  ChazTunerConstants.kFrontLeftXPos,
+                  ChazTunerConstants.kFrontLeftYPos,
+                  ChazTunerConstants.kInvertLeftSide,
+                  ChazTunerConstants.kFrontLeftSteerMotorInverted,
+                  ChazTunerConstants.kFrontLeftEncoderInverted);
+  public static final SwerveModuleConstants<
+          TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
+      FrontRight =
+          robotInitConstants.isCompBot
+              ? ConstantCreator.createModuleConstants(
+                  PoseidonTunerConstants.kFrontRightSteerMotorId,
+                  PoseidonTunerConstants.kFrontRightDriveMotorId,
+                  PoseidonTunerConstants.kFrontRightEncoderId,
+                  PoseidonTunerConstants.kFrontRightEncoderOffset,
+                  PoseidonTunerConstants.kFrontRightXPos,
+                  PoseidonTunerConstants.kFrontRightYPos,
+                  PoseidonTunerConstants.kInvertRightSide,
+                  PoseidonTunerConstants.kFrontRightSteerMotorInverted,
+                  PoseidonTunerConstants.kFrontRightEncoderInverted)
+              : ConstantCreator.createModuleConstants(
+                  ChazTunerConstants.kFrontRightSteerMotorId,
+                  ChazTunerConstants.kFrontRightDriveMotorId,
+                  ChazTunerConstants.kFrontRightEncoderId,
+                  ChazTunerConstants.kFrontRightEncoderOffset,
+                  ChazTunerConstants.kFrontRightXPos,
+                  ChazTunerConstants.kFrontRightYPos,
+                  ChazTunerConstants.kInvertRightSide,
+                  ChazTunerConstants.kFrontRightSteerMotorInverted,
+                  ChazTunerConstants.kFrontRightEncoderInverted);
+  public static final SwerveModuleConstants<
+          TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
+      BackLeft =
+          robotInitConstants.isCompBot
+              ? ConstantCreator.createModuleConstants(
+                  PoseidonTunerConstants.kBackLeftSteerMotorId,
+                  PoseidonTunerConstants.kBackLeftDriveMotorId,
+                  PoseidonTunerConstants.kBackLeftEncoderId,
+                  PoseidonTunerConstants.kBackLeftEncoderOffset,
+                  PoseidonTunerConstants.kBackLeftXPos,
+                  PoseidonTunerConstants.kBackLeftYPos,
+                  PoseidonTunerConstants.kInvertLeftSide,
+                  PoseidonTunerConstants.kBackLeftSteerMotorInverted,
+                  PoseidonTunerConstants.kBackLeftEncoderInverted)
+              : ConstantCreator.createModuleConstants(
+                  ChazTunerConstants.kBackLeftSteerMotorId,
+                  ChazTunerConstants.kBackLeftDriveMotorId,
+                  ChazTunerConstants.kBackLeftEncoderId,
+                  ChazTunerConstants.kBackLeftEncoderOffset,
+                  ChazTunerConstants.kBackLeftXPos,
+                  ChazTunerConstants.kBackLeftYPos,
+                  ChazTunerConstants.kInvertLeftSide,
+                  ChazTunerConstants.kBackLeftSteerMotorInverted,
+                  ChazTunerConstants.kBackLeftEncoderInverted);
+  public static final SwerveModuleConstants<
+          TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>
+      BackRight =
+          robotInitConstants.isCompBot
+              ? ConstantCreator.createModuleConstants(
+                  PoseidonTunerConstants.kBackRightSteerMotorId,
+                  PoseidonTunerConstants.kBackRightDriveMotorId,
+                  PoseidonTunerConstants.kBackRightEncoderId,
+                  PoseidonTunerConstants.kBackRightEncoderOffset,
+                  PoseidonTunerConstants.kBackRightXPos,
+                  PoseidonTunerConstants.kBackRightYPos,
+                  PoseidonTunerConstants.kInvertRightSide,
+                  PoseidonTunerConstants.kBackRightSteerMotorInverted,
+                  PoseidonTunerConstants.kBackRightEncoderInverted)
+              : ConstantCreator.createModuleConstants(
+                  ChazTunerConstants.kBackRightSteerMotorId,
+                  ChazTunerConstants.kBackRightDriveMotorId,
+                  ChazTunerConstants.kBackRightEncoderId,
+                  ChazTunerConstants.kBackRightEncoderOffset,
+                  ChazTunerConstants.kBackRightXPos,
+                  ChazTunerConstants.kBackRightYPos,
+                  ChazTunerConstants.kInvertRightSide,
+                  ChazTunerConstants.kBackRightSteerMotorInverted,
+                  ChazTunerConstants.kBackRightEncoderInverted);
+
+  public static final Matrix<N3, N1> odometryStd = VecBuilder.fill(0.06, 0.06, 0.01);
+  public static final Matrix<N3, N1> visionStd = VecBuilder.fill(0.35, 0.35, 0.8);
+
+  /** Swerve Drive class utilizing CTR Electronics' Phoenix 6 API with the selected device types. */
+  public static class TunerSwerveDrivetrain extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> {
+    /**
+     * Constructs a CTRE SwerveDrivetrain using the specified constants.
+     *
+     * <p>This constructs the underlying hardware devices, so users should not construct the devices
+     * themselves. If they need the devices, they can access them through getters in the classes.
+     *
+     * @param drivetrainConstants Drivetrain-wide constants for the swerve drive
+     * @param modules Constants for each specific module
+     */
+    public TunerSwerveDrivetrain(
+        SwerveDrivetrainConstants drivetrainConstants, SwerveModuleConstants<?, ?, ?>... modules) {
+      super(TalonFX::new, TalonFX::new, CANcoder::new, drivetrainConstants, modules);
     }
-
-    public static final SwerveDrivetrainConstants DrivetrainConstants = 
-        robotInitConstants.isCompBot ?
-            new SwerveDrivetrainConstants()
-                    .withCANBusName(PoseidonTunerConstants.kCANBus.getName())
-                    .withPigeon2Id(PoseidonTunerConstants.kPigeonId)
-                    .withPigeon2Configs(PoseidonTunerConstants.pigeonConfigs)
-            :
-            new SwerveDrivetrainConstants()
-                    .withCANBusName(ChazTunerConstants.kCANBus.getName())
-                    .withPigeon2Id(ChazTunerConstants.kPigeonId)
-                    .withPigeon2Configs(ChazTunerConstants.pigeonConfigs);
-
-    private static final SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> ConstantCreator =
-        robotInitConstants.isCompBot ?
-            new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
-                    .withDriveMotorGearRatio(PoseidonTunerConstants.kDriveGearRatio)
-                    .withSteerMotorGearRatio(PoseidonTunerConstants.kSteerGearRatio)
-                    .withCouplingGearRatio(PoseidonTunerConstants.kCoupleRatio)
-                    .withWheelRadius(PoseidonTunerConstants.kWheelRadius)
-                    .withSteerMotorGains(PoseidonTunerConstants.steerGains)
-                    .withDriveMotorGains(PoseidonTunerConstants.driveGains)
-                    .withSteerMotorClosedLoopOutput(PoseidonTunerConstants.kSteerClosedLoopOutput)
-                    .withDriveMotorClosedLoopOutput(PoseidonTunerConstants.kDriveClosedLoopOutput)
-                    .withSlipCurrent(PoseidonTunerConstants.kSlipCurrent)
-                    .withSpeedAt12Volts(TunerConstants.kSpeedAt12Volts)
-                    .withDriveMotorType(PoseidonTunerConstants.kDriveMotorType)
-                    .withSteerMotorType(PoseidonTunerConstants.kSteerMotorType)
-                    .withFeedbackSource(PoseidonTunerConstants.kSteerFeedbackType)
-                    .withDriveMotorInitialConfigs(PoseidonTunerConstants.driveInitialConfigs)
-                    .withSteerMotorInitialConfigs(PoseidonTunerConstants.steerInitialConfigs)
-                    .withEncoderInitialConfigs(PoseidonTunerConstants.encoderInitialConfigs)
-                    .withSteerInertia(PoseidonTunerConstants.kSteerInertia)
-                    .withDriveInertia(PoseidonTunerConstants.kDriveInertia)
-                    .withSteerFrictionVoltage(PoseidonTunerConstants.kSteerFrictionVoltage)
-                    .withDriveFrictionVoltage(PoseidonTunerConstants.kDriveFrictionVoltage)
-            :
-            new SwerveModuleConstantsFactory<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration>()
-                    .withDriveMotorGearRatio(ChazTunerConstants.kDriveGearRatio)
-                    .withSteerMotorGearRatio(ChazTunerConstants.kSteerGearRatio)
-                    .withCouplingGearRatio(ChazTunerConstants.kCoupleRatio)
-                    .withWheelRadius(ChazTunerConstants.kWheelRadius)
-                    .withSteerMotorGains(ChazTunerConstants.steerGains)
-                    .withDriveMotorGains(ChazTunerConstants.driveGains)
-                    .withSteerMotorClosedLoopOutput(ChazTunerConstants.kSteerClosedLoopOutput)
-                    .withDriveMotorClosedLoopOutput(ChazTunerConstants.kDriveClosedLoopOutput)
-                    .withSlipCurrent(ChazTunerConstants.kSlipCurrent)
-                    .withSpeedAt12Volts(TunerConstants.kSpeedAt12Volts)
-                    .withDriveMotorType(ChazTunerConstants.kDriveMotorType)
-                    .withSteerMotorType(ChazTunerConstants.kSteerMotorType)
-                    .withFeedbackSource(ChazTunerConstants.kSteerFeedbackType)
-                    .withDriveMotorInitialConfigs(ChazTunerConstants.driveInitialConfigs)
-                    .withSteerMotorInitialConfigs(ChazTunerConstants.steerInitialConfigs)
-                    .withEncoderInitialConfigs(ChazTunerConstants.encoderInitialConfigs)
-                    .withSteerInertia(ChazTunerConstants.kSteerInertia)
-                    .withDriveInertia(ChazTunerConstants.kDriveInertia)
-                    .withSteerFrictionVoltage(ChazTunerConstants.kSteerFrictionVoltage)
-                    .withDriveFrictionVoltage(ChazTunerConstants.kDriveFrictionVoltage);
-        
-
-    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontLeft =
-        robotInitConstants.isCompBot ?
-            ConstantCreator.createModuleConstants(
-                PoseidonTunerConstants.kFrontLeftSteerMotorId, PoseidonTunerConstants.kFrontLeftDriveMotorId, PoseidonTunerConstants.kFrontLeftEncoderId, PoseidonTunerConstants.kFrontLeftEncoderOffset,
-                PoseidonTunerConstants.kFrontLeftXPos, PoseidonTunerConstants.kFrontLeftYPos, PoseidonTunerConstants.kInvertLeftSide, PoseidonTunerConstants.kFrontLeftSteerMotorInverted, PoseidonTunerConstants.kFrontLeftEncoderInverted
-                ) :
-            ConstantCreator.createModuleConstants(
-                ChazTunerConstants.kFrontLeftSteerMotorId, ChazTunerConstants.kFrontLeftDriveMotorId, ChazTunerConstants.kFrontLeftEncoderId, ChazTunerConstants.kFrontLeftEncoderOffset,
-                ChazTunerConstants.kFrontLeftXPos, ChazTunerConstants.kFrontLeftYPos, ChazTunerConstants.kInvertLeftSide, ChazTunerConstants.kFrontLeftSteerMotorInverted, ChazTunerConstants.kFrontLeftEncoderInverted
-            );
-    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> FrontRight =
-        robotInitConstants.isCompBot ?
-            ConstantCreator.createModuleConstants(
-                PoseidonTunerConstants.kFrontRightSteerMotorId, PoseidonTunerConstants.kFrontRightDriveMotorId, PoseidonTunerConstants.kFrontRightEncoderId, PoseidonTunerConstants.kFrontRightEncoderOffset,
-                PoseidonTunerConstants.kFrontRightXPos, PoseidonTunerConstants.kFrontRightYPos, PoseidonTunerConstants.kInvertRightSide, PoseidonTunerConstants.kFrontRightSteerMotorInverted, PoseidonTunerConstants.kFrontRightEncoderInverted
-                ) :
-            ConstantCreator.createModuleConstants(
-                ChazTunerConstants.kFrontRightSteerMotorId, ChazTunerConstants.kFrontRightDriveMotorId, ChazTunerConstants.kFrontRightEncoderId, ChazTunerConstants.kFrontRightEncoderOffset,
-                ChazTunerConstants.kFrontRightXPos, ChazTunerConstants.kFrontRightYPos, ChazTunerConstants.kInvertRightSide, ChazTunerConstants.kFrontRightSteerMotorInverted, ChazTunerConstants.kFrontRightEncoderInverted
-            );
-    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackLeft =
-        robotInitConstants.isCompBot ?
-            ConstantCreator.createModuleConstants(
-                PoseidonTunerConstants.kBackLeftSteerMotorId, PoseidonTunerConstants.kBackLeftDriveMotorId, PoseidonTunerConstants.kBackLeftEncoderId, PoseidonTunerConstants.kBackLeftEncoderOffset,
-                PoseidonTunerConstants.kBackLeftXPos, PoseidonTunerConstants.kBackLeftYPos, PoseidonTunerConstants.kInvertLeftSide, PoseidonTunerConstants.kBackLeftSteerMotorInverted, PoseidonTunerConstants.kBackLeftEncoderInverted
-                ) :
-            ConstantCreator.createModuleConstants(
-                ChazTunerConstants.kBackLeftSteerMotorId, ChazTunerConstants.kBackLeftDriveMotorId, ChazTunerConstants.kBackLeftEncoderId, ChazTunerConstants.kBackLeftEncoderOffset,
-                ChazTunerConstants.kBackLeftXPos, ChazTunerConstants.kBackLeftYPos, ChazTunerConstants.kInvertLeftSide, ChazTunerConstants.kBackLeftSteerMotorInverted, ChazTunerConstants.kBackLeftEncoderInverted
-            );
-    public static final SwerveModuleConstants<TalonFXConfiguration, TalonFXConfiguration, CANcoderConfiguration> BackRight =
-        robotInitConstants.isCompBot ?
-            ConstantCreator.createModuleConstants(
-                PoseidonTunerConstants.kBackRightSteerMotorId, PoseidonTunerConstants.kBackRightDriveMotorId, PoseidonTunerConstants.kBackRightEncoderId, PoseidonTunerConstants.kBackRightEncoderOffset,
-                PoseidonTunerConstants.kBackRightXPos, PoseidonTunerConstants.kBackRightYPos, PoseidonTunerConstants.kInvertRightSide, PoseidonTunerConstants.kBackRightSteerMotorInverted, PoseidonTunerConstants.kBackRightEncoderInverted
-                ) :
-            ConstantCreator.createModuleConstants(
-                ChazTunerConstants.kBackRightSteerMotorId, ChazTunerConstants.kBackRightDriveMotorId, ChazTunerConstants.kBackRightEncoderId, ChazTunerConstants.kBackRightEncoderOffset,
-                ChazTunerConstants.kBackRightXPos, ChazTunerConstants.kBackRightYPos, ChazTunerConstants.kInvertRightSide, ChazTunerConstants.kBackRightSteerMotorInverted, ChazTunerConstants.kBackRightEncoderInverted
-            );
-
-    public static final Matrix<N3, N1> odometryStd = VecBuilder.fill(0.06, 0.06, 0.01);
-    public static final Matrix<N3, N1> visionStd = VecBuilder.fill(0.35, 0.35, 0.8);        
 
     /**
-     * Swerve Drive class utilizing CTR Electronics' Phoenix 6 API with the selected device types.
+     * Constructs a CTRE SwerveDrivetrain using the specified constants.
+     *
+     * <p>This constructs the underlying hardware devices, so users should not construct the devices
+     * themselves. If they need the devices, they can access them through getters in the classes.
+     *
+     * @param drivetrainConstants Drivetrain-wide constants for the swerve drive
+     * @param odometryUpdateFrequency The frequency to run the odometry loop. If unspecified or set
+     *     to 0 Hz, this is 250 Hz on CAN FD, and 100 Hz on CAN 2.0.
+     * @param modules Constants for each specific module
      */
-    public static class TunerSwerveDrivetrain extends SwerveDrivetrain<TalonFX, TalonFX, CANcoder> {
-        /**
-         * Constructs a CTRE SwerveDrivetrain using the specified constants.
-         * <p>
-         * This constructs the underlying hardware devices, so users should not construct
-         * the devices themselves. If they need the devices, they can access them through
-         * getters in the classes.
-         *
-         * @param drivetrainConstants   Drivetrain-wide constants for the swerve drive
-         * @param modules               Constants for each specific module
-         */
-        public TunerSwerveDrivetrain(
-            SwerveDrivetrainConstants drivetrainConstants,
-            SwerveModuleConstants<?, ?, ?>... modules
-        ) {
-            super(
-                TalonFX::new, TalonFX::new, CANcoder::new,
-                drivetrainConstants, modules
-            );
-        }
-
-        /**
-         * Constructs a CTRE SwerveDrivetrain using the specified constants.
-         * <p>
-         * This constructs the underlying hardware devices, so users should not construct
-         * the devices themselves. If they need the devices, they can access them through
-         * getters in the classes.
-         *
-         * @param drivetrainConstants     Drivetrain-wide constants for the swerve drive
-         * @param odometryUpdateFrequency The frequency to run the odometry loop. If
-         *                                unspecified or set to 0 Hz, this is 250 Hz on
-         *                                CAN FD, and 100 Hz on CAN 2.0.
-         * @param modules                 Constants for each specific module
-         */
-        public TunerSwerveDrivetrain(
-            SwerveDrivetrainConstants drivetrainConstants,
-            double odometryUpdateFrequency,
-            SwerveModuleConstants<?, ?, ?>... modules
-        ) {
-            super(
-                TalonFX::new, TalonFX::new, CANcoder::new,
-                drivetrainConstants, odometryUpdateFrequency, modules
-            );
-        }
-
-        /**
-         * Constructs a CTRE SwerveDrivetrain using the specified constants.
-         * <p>
-         * This constructs the underlying hardware devices, so users should not construct
-         * the devices themselves. If they need the devices, they can access them through
-         * getters in the classes.
-         *
-         * @param drivetrainConstants       Drivetrain-wide constants for the swerve drive
-         * @param odometryUpdateFrequency   The frequency to run the odometry loop. If
-         *                                  unspecified or set to 0 Hz, this is 250 Hz on
-         *                                  CAN FD, and 100 Hz on CAN 2.0.
-         * @param odometryStandardDeviation The standard deviation for odometry calculation
-         *                                  in the form [x, y, theta]ᵀ, with units in meters
-         *                                  and radians
-         * @param visionStandardDeviation   The standard deviation for vision calculation
-         *                                  in the form [x, y, theta]ᵀ, with units in meters
-         *                                  and radians
-         * @param modules                   Constants for each specific module
-         */
-        public TunerSwerveDrivetrain(
-            SwerveDrivetrainConstants drivetrainConstants,
-            double odometryUpdateFrequency,
-            Matrix<N3, N1> odometryStandardDeviation,
-            Matrix<N3, N1> visionStandardDeviation,
-            SwerveModuleConstants<?, ?, ?>... modules
-        ) {
-            super(
-                TalonFX::new, TalonFX::new, CANcoder::new,
-                drivetrainConstants, odometryUpdateFrequency,
-                odometryStandardDeviation, visionStandardDeviation, modules
-            );
-        }
+    public TunerSwerveDrivetrain(
+        SwerveDrivetrainConstants drivetrainConstants,
+        double odometryUpdateFrequency,
+        SwerveModuleConstants<?, ?, ?>... modules) {
+      super(
+          TalonFX::new,
+          TalonFX::new,
+          CANcoder::new,
+          drivetrainConstants,
+          odometryUpdateFrequency,
+          modules);
     }
+
+    /**
+     * Constructs a CTRE SwerveDrivetrain using the specified constants.
+     *
+     * <p>This constructs the underlying hardware devices, so users should not construct the devices
+     * themselves. If they need the devices, they can access them through getters in the classes.
+     *
+     * @param drivetrainConstants Drivetrain-wide constants for the swerve drive
+     * @param odometryUpdateFrequency The frequency to run the odometry loop. If unspecified or set
+     *     to 0 Hz, this is 250 Hz on CAN FD, and 100 Hz on CAN 2.0.
+     * @param odometryStandardDeviation The standard deviation for odometry calculation in the form
+     *     [x, y, theta]ᵀ, with units in meters and radians
+     * @param visionStandardDeviation The standard deviation for vision calculation in the form [x,
+     *     y, theta]ᵀ, with units in meters and radians
+     * @param modules Constants for each specific module
+     */
+    public TunerSwerveDrivetrain(
+        SwerveDrivetrainConstants drivetrainConstants,
+        double odometryUpdateFrequency,
+        Matrix<N3, N1> odometryStandardDeviation,
+        Matrix<N3, N1> visionStandardDeviation,
+        SwerveModuleConstants<?, ?, ?>... modules) {
+      super(
+          TalonFX::new,
+          TalonFX::new,
+          CANcoder::new,
+          drivetrainConstants,
+          odometryUpdateFrequency,
+          odometryStandardDeviation,
+          visionStandardDeviation,
+          modules);
+    }
+  }
 }
