@@ -17,6 +17,7 @@ import com.pathplanner.lib.auto.AutoBuilder;
 import edu.wpi.first.math.geometry.Pose2d;
 import edu.wpi.first.math.geometry.Rotation2d;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.RobotBase;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.Commands;
@@ -30,13 +31,12 @@ import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
-import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
-import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import frc.robot.subsystems.elevator.ElevatorCommands;
 import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.elevator.ElevatorIOSim;
-import frc.robot.subsystems.elevator.ElevatorCommands;
-import edu.wpi.first.wpilibj.RobotBase;
+import frc.robot.subsystems.elevator.ElevatorSubsystem;
+import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -93,8 +93,7 @@ public class RobotContainer {
         break;
     }
 
-    ElevatorIO elevatorIO =
-        RobotBase.isReal() ? new ElevatorIOReal() : new ElevatorIOSim();
+    ElevatorIO elevatorIO = RobotBase.isReal() ? new ElevatorIOReal() : new ElevatorIOSim();
     elevator = new ElevatorSubsystem(elevatorIO);
 
     // Set up auto routines
@@ -158,38 +157,26 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-  
+
     // --- Elevator bindings ---
 
     // Manual control with left Y (invert so pushing forward goes up)
     // operator.leftY() should be adapted to however you access the axis.
     elevator.setDefaultCommand(
-        ElevatorCommands.manualControl(
-            elevator,
-            () -> -operator.getLeftY()
-        )
-    );
+        ElevatorCommands.manualControl(elevator, () -> -operator.getLeftY()));
 
     // Preset positions (example buttons — adapt to your real buttons)
     // A = low position (0.2 m)
-    operator.a().onTrue(
-        ElevatorCommands.moveToHeight(elevator, 0.2)
-    );
+    operator.a().onTrue(ElevatorCommands.moveToHeight(elevator, 0.2));
 
     // B = mid position (0.6 m)
-    operator.b().onTrue(
-        ElevatorCommands.moveToHeight(elevator, 0.6)
-    );
+    operator.b().onTrue(ElevatorCommands.moveToHeight(elevator, 0.6));
 
     // Y = high position (0.9 m)
-    operator.y().onTrue(
-        ElevatorCommands.moveToHeight(elevator, 0.9)
-    );
+    operator.y().onTrue(ElevatorCommands.moveToHeight(elevator, 0.9));
 
     // X = zero elevator position (e.g., when at bottom hard stop)
-    operator.x().onTrue(
-        ElevatorCommands.zeroPosition(elevator)
-    );
+    operator.x().onTrue(ElevatorCommands.zeroPosition(elevator));
   }
 
   /**
