@@ -36,6 +36,7 @@ import frc.robot.subsystems.elevator.ElevatorIO;
 import frc.robot.subsystems.elevator.ElevatorIOReal;
 import frc.robot.subsystems.elevator.ElevatorIOSim;
 import frc.robot.subsystems.elevator.ElevatorCommands;
+import edu.wpi.first.wpilibj.RobotBase;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
