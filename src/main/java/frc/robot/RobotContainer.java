@@ -25,17 +25,16 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.climber.ClimberIO;
+import frc.robot.subsystems.climber.ClimberIOReal;
+import frc.robot.subsystems.climber.ClimberIOSim;
+import frc.robot.subsystems.climber.ClimberSubsystem;
 import frc.robot.subsystems.drive.Drive;
 import frc.robot.subsystems.drive.GyroIO;
 import frc.robot.subsystems.drive.GyroIOPigeon2;
 import frc.robot.subsystems.drive.ModuleIO;
 import frc.robot.subsystems.drive.ModuleIOSim;
 import frc.robot.subsystems.drive.ModuleIOTalonFX;
-import frc.robot.subsystems.elevator.ElevatorCommands;
-import frc.robot.subsystems.elevator.ElevatorIO;
-import frc.robot.subsystems.elevator.ElevatorIOReal;
-import frc.robot.subsystems.elevator.ElevatorIOSim;
-import frc.robot.subsystems.elevator.ElevatorSubsystem;
 import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 
 /**
@@ -47,7 +46,7 @@ import org.littletonrobotics.junction.networktables.LoggedDashboardChooser;
 public class RobotContainer {
   // Subsystems
   private final Drive drive;
-  private final ElevatorSubsystem elevator;
+  private final ClimberSubsystem climber;
 
   // Controller
   private final CommandXboxController controller = new CommandXboxController(0);
@@ -93,8 +92,8 @@ public class RobotContainer {
         break;
     }
 
-    ElevatorIO elevatorIO = RobotBase.isReal() ? new ElevatorIOReal() : new ElevatorIOSim();
-    elevator = new ElevatorSubsystem(elevatorIO);
+    ClimberIO climberIO = RobotBase.isReal() ? new ClimberIOReal() : new ClimberIOSim();
+    climber = new ClimberSubsystem(climberIO);
 
     // Set up auto routines
     autoChooser = new LoggedDashboardChooser<>("Auto Choices", AutoBuilder.buildAutoChooser());
@@ -157,27 +156,10 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
-
-    // --- Elevator bindings ---
-
-    // Manual control with left Y (invert so pushing forward goes up)
-    // operator.leftY() should be adapted to however you access the axis.
-    elevator.setDefaultCommand(
-        ElevatorCommands.manualControl(elevator, () -> -operator.getLeftY()));
-
-    // Preset positions (example buttons — adapt to your real buttons)
-    // A = low position (0.2 m)
-    operator.a().onTrue(ElevatorCommands.moveToHeight(elevator, 0.2));
-
-    // B = mid position (0.6 m)
-    operator.b().onTrue(ElevatorCommands.moveToHeight(elevator, 0.6));
-
-    // Y = high position (0.9 m)
-    operator.y().onTrue(ElevatorCommands.moveToHeight(elevator, 0.9));
-
-    // X = zero elevator position (e.g., when at bottom hard stop)
-    operator.x().onTrue(ElevatorCommands.zeroPosition(elevator));
   }
+  // // Climber Bindings
+  // climber.setDefaultCommand(climber.setWheelRollerMotor(controller.getRightY()), ()->
+  // MathUtil.applyDeadband(operatorController.getLeftY(), STATIC_DEADBAND));
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
