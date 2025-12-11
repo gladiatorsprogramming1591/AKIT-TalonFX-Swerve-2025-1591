@@ -8,7 +8,7 @@ public class ClimberSubsystem extends SubsystemBase {
 
   private final ClimberIO io;
   private final ClimberIO.ClimberIOInputs inputs = new ClimberIO.ClimberIOInputs();
-  private SparkBase climberRollerMotor;
+  private SparkBase wheelRollerMotor;
   private SparkBase winchRollerMotor;
 
   private double targetHeightMeters = 0.0;
@@ -23,11 +23,11 @@ public class ClimberSubsystem extends SubsystemBase {
     io.updateInputs(inputs);
 
     // Telemetry
-    SmartDashboard.putNumber("Elevator/PositionMeters", inputs.positionMeters);
-    SmartDashboard.putNumber("Elevator/VelocityMPS", inputs.velocity);
-    SmartDashboard.putNumber("Elevator/AppliedVolts", inputs.appliedVolts);
-    SmartDashboard.putBoolean("Elevator/ClosedLoop", closedLoopEnabled);
-    SmartDashboard.putNumber("Elevator/TargetMeters", targetHeightMeters);
+    SmartDashboard.putNumber("Climber/PositionMeters", inputs.positionMeters);
+    SmartDashboard.putNumber("Climber/VelocityMPS", inputs.velocity);
+    SmartDashboard.putNumber("Climber/AppliedVolts", inputs.appliedVolts);
+    SmartDashboard.putBoolean("Climber/ClosedLoop", closedLoopEnabled);
+    SmartDashboard.putNumber("Climber/TargetMeters", targetHeightMeters);
   }
 
   // ---- External API ----
@@ -37,6 +37,11 @@ public class ClimberSubsystem extends SubsystemBase {
   }
 
   public void setWheelRollerMotor(double speed) {
-    winchRollerMotor.set(speed);
+    wheelRollerMotor.set(speed);
+  }
+
+  public void setWinchAndWheelRollerMotors(double winchSpeed, double wheelSpeed) {
+    setWinchRollerMotor(winchSpeed);
+    setWheelRollerMotor(wheelSpeed);
   }
 }

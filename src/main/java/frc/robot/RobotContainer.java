@@ -25,6 +25,7 @@ import edu.wpi.first.wpilibj2.command.button.CommandXboxController;
 import edu.wpi.first.wpilibj2.command.sysid.SysIdRoutine;
 import frc.robot.commands.DriveCommands;
 import frc.robot.generated.TunerConstants;
+import frc.robot.subsystems.climber.ClimberCommands;
 import frc.robot.subsystems.climber.ClimberIO;
 import frc.robot.subsystems.climber.ClimberIOReal;
 import frc.robot.subsystems.climber.ClimberIOSim;
@@ -156,10 +157,12 @@ public class RobotContainer {
                             new Pose2d(drive.getPose().getTranslation(), new Rotation2d())),
                     drive)
                 .ignoringDisable(true));
+
+    // Climber Bindings
+    climber.setDefaultCommand(
+        ClimberCommands.WinchAndWheelCommand(
+            climber, () -> operator.getRightY(), () -> operator.getLeftY()));
   }
-  // // Climber Bindings
-  // climber.setDefaultCommand(climber.setWheelRollerMotor(controller.getRightY()), ()->
-  // MathUtil.applyDeadband(operatorController.getLeftY(), STATIC_DEADBAND));
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
