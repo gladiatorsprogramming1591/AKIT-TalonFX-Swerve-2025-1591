@@ -15,8 +15,7 @@ public class ElevatorIOSim implements ElevatorIO {
           ElevatorConstants.MIN_HEIGHT_METERS,
           ElevatorConstants.MAX_HEIGHT_METERS,
           true,
-          0,
-          null);
+          0);
 
   private double appliedVolts = 0.0;
 
